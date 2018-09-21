@@ -1,4 +1,26 @@
-var myApp = angular.module('myApp',[]);
+var myApp = angular.module('myApp', ['ngRoute']);
+   myApp.config(function($routeProvider, $locationProvider, $httpProvider){
+        $routeProvider
+            .when('/home', {
+                templateUrl: '../view/home.html'
+            })
+            .when("/admin", {
+              // template: "<div>Admin Page</div>"
+              templateUrl: "../view/admin.html"
+            })
+            .when("/contact",{
+              templateUrl: '../view/contact.html'
+            // template: "<div>Contact Page</div>"
+             })
+            .otherwise({ 
+             redirectTo: '../view/home.html' 
+              // template: "<div>Other Page</div>"
+          });
+      //  $locationProvider.html5Mode(true);
+    });
+    // myApp.controller("homeController",function($scope){
+    //     $scope.message = "Home Page";
+    // })
 
 myApp.directive('fileModel', ['$parse', function ($parse) {
   return {
