@@ -1,5 +1,6 @@
    <div class="col-sm-9">
-                <div class="container" ng-controller="AppCtrl">
+                
+                <div class="container" ng-controller="adminController">
                    
                      <h1>Contact List App</h1>
                     <form name="myForm">
@@ -30,11 +31,19 @@
                             <span ng-show="myForm.number.$error.required && myForm.number.$dirty">Enter Proper Number</span>
                             <span ng-show="!myForm.number.$error.required && (myForm.number.$error.minlength || myForm.number.$error.maxlength) && myForm.number.$dirty">Username 10 in Number.</span>
                         </td>
-                      <td><input type="file" id="uploadFile" name="uploadFile"  file-model="uploadFile"/>
-                          <button ng-click="uploadFile()">upload me</button>
+                      <!-- <td><input class="form-control" type="file" id="uploadFile" name="uploadFile" file-upload multiple/> -->
+                          <!-- <button ng-click="uploadFile()">upload me</button>
+                          <input type="file" ngf-select ng-model="picFile" name="file"    
+                          accept="image/*" ngf-max-size="2MB" required ngf-model-invalid="errorFile"> -->
+                          <!-- <button class="btn btn-primary" ng-click="uploadFile(picFile)">Upload me</button> 
+                          
+                          ng-model="picFile"-->
+                          <td>
+                          <input class="form-control" type="file" ngf-select ng-model="contact.file" id="number" name="file"    
+                          accept="image/*">
                       </td>
                 
-                      <td><button class="btn btn-primary" type="submit" ng-click="addContact()" ng-disabled="!myForm.$valid">Add Contact</button></td>
+                      <td><button class="btn btn-primary" type="submit" ng-click="uploadFile(contact.file);addContact()" ng-disabled="!myForm.$valid">Add Contact</button></td>
                           <td><div class="form-group"><button class="btn btn-info" id="submitForm" name="submitForm" type="submit" class="btn btn-primary" ng-click="update()">Update</button>&nbsp;&nbsp;<button class="btn btn-info" ng-click="deselect()">Clear</button>
                           </div>
                         </td>
@@ -43,7 +52,7 @@
                           <td>{{contact.name}}</td>
                           <td>{{contact.email}}</td>
                           <td>{{contact.phone}}</td>
-                          <td>{{contact.uploadFile}}</td>
+                          <td>{{contact.file.result}}</td>
                           <td><button class="btn btn-danger" ng-click="remove(contact._id)">Remove</button></td>
                           <td><button class="btn btn-warning" ng-click="edit(contact._id)">Edit</button></td>
                         </tr>

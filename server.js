@@ -14,13 +14,17 @@ app.get('/contactlist', function (req, res) {
   console.log('I received a GET request');
 
   db.contactlist.find(function (err, docs) {
-    console.log(docs);
+    console.log("get server.js contactlist --> ",docs);
     res.json(docs);
   });
 });
 
 app.post('/contactlist', function (req, res) {
-  console.log(req.body);
+  console.log("req.body---->",req.body);
+  console.log("req.body.name---->",req.body.name);
+  console.log("req.body.email---->",req.body.email);
+  console.log("req.body.number---->",req.body.number);
+  console.log("req.body.file---->",req.body.file.result);
   db.contactlist.insert(req.body, function(err, doc) {
     res.json(doc);
   });
@@ -36,7 +40,7 @@ app.delete('/contactlist/:id', function (req, res) {
 
 app.get('/contactlist/:id', function (req, res) {
   var id = req.params.id;
-  console.log(id);
+  console.log("Server.js --> ",id);
   db.contactlist.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
     res.json(doc);
   });
@@ -44,15 +48,18 @@ app.get('/contactlist/:id', function (req, res) {
 
 app.put('/contactlist/:id', function (req, res) {
   var id = req.params.id;
-  console.log(req.body.name);
+  console.log("req.body.name---->",req.body.name);
+  console.log("req.body.email---->",req.body.email);
+  console.log("req.body.number---->",req.body.number);
+  console.log("req.body.file---->",req.body.file.result);
   db.contactlist.findAndModify({
     query: {_id: mongojs.ObjectId(id)},
-    update: {$set: {name: req.body.name, email: req.body.email, number: req.body.number, uploadFile: req.body.uploadFile}},
+    update: {$set: {name: req.body.name, email: req.body.email, number: req.body.number, uploadFile: req.body.file}},
     new: true}, function (err, doc) {
       res.json(doc);
     }
   );
 });
 
-app.listen(3003);
-console.log("Server running on port 3003"); 
+app.listen(3004);
+console.log("Server running on port 3004"); 
