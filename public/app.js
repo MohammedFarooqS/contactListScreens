@@ -26,6 +26,14 @@
             templateUrl: 'view/contact.html',
             controller: 'contactController'
         }) 
+        .when('/Anna', {
+            templateUrl: 'view/Candidate/Anna.html',
+        })
+        .when('/ChangeData', {
+            templateUrl: 'view/Candidate/ChangeData.html',
+        }) 
+        
+
         .otherwise({redirectTo : 'home'});
     });
   
